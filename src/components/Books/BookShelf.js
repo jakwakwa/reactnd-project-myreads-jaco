@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../styles/BookShelf.scss';
 import BooksList from './BooksList';
 
 class BookShelf extends Component {

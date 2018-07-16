@@ -7,6 +7,7 @@ import * as BooksAPI from '../utils/BooksAPI';
 
 class App extends Component {
   state = {
+    pageTitle: 'MyReads',
     books: []
   };
   componentDidMount() {
@@ -29,7 +30,7 @@ class App extends Component {
     console.log(this.state.books);
     return (
       <Fragment>
-        <Header />
+        <Header title={this.state.pageTitle} />
         <div className="list-books-content">
           <div>
             <BookShelf books={currentlyReading} title="Currently Reading" />

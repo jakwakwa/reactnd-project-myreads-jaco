@@ -3,6 +3,7 @@ import '../styles/app.scss';
 // import ReactDOM from 'react-dom';
 import Header from './Layouts/Header';
 import BookShelf from './Books/BookShelf';
+import SearchButton from './Search/SearchButton';
 import * as BooksAPI from '../utils/BooksAPI';
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
             <BookShelf books={read} title="Read" />
           </div>
         </div>
+        <SearchButton />
       </Fragment>
     );
   }

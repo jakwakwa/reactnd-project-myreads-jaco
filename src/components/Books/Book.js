@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 class Book extends Component {
   handleClick = e => {
     e.preventDefault();
-    // console.log(this.shelfRef.value);
-    // console.log(key);
+    // got value from select > option value
     const shelf = e.target.value;
+    // passed in id through index from parent component
+    // Need the id of the book in order to target relevant object
     const id = this.props.index;
-    // alert(bookShelf);
-    console.log('New Shelf Property:', shelf);
-    console.log('The book that is clicked on ID:', id);
+    // passing values to changeShelf function which lives in the App Component
     this.props.changeShelf(shelf, id);
   };
   render() {

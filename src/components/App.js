@@ -6,9 +6,10 @@ import BookShelf from './Books/BookShelf';
 import SearchButton from './Search/SearchButton';
 import * as BooksAPI from '../utils/BooksAPI';
 
+const pageTitle = 'MyReads';
+
 class App extends Component {
   state = {
-    pageTitle: 'MyReads',
     books: []
   };
   componentDidMount() {
@@ -16,6 +17,18 @@ class App extends Component {
       this.setState({ books });
     });
   }
+  changeShelf = (shelf, id) => {
+    // 1. Take a copy of the existing state
+    const books = this.state.books.map(
+      book => (book.id === id ? { ...book, shelf: shelf } : book)
+    );
+    // 2. Get the correct object that matches book id
+    console.log('Copy of books', books);
+    console.log('copy of books with book shelf changed', books);
+    // console.log(targetBook);
+    // 2. Set new books array to state
+    this.setState({ books });
+  };
   render() {
     // filter 'currently reading' books
     const currentlyReading = this.state.books.filter(
@@ -31,10 +44,14 @@ class App extends Component {
     console.log(this.state.books);
     return (
       <Fragment>
-        <Header title={this.state.pageTitle} />
+        <Header title={pageTitle} />
         <div className="list-books-content">
           <div>
-            <BookShelf books={currentlyReading} title="Currently Reading" />
+            <BookShelf
+              changeShelf={this.changeShelf}
+              books={currentlyReading}
+              title="Currently Reading"
+            />
             <BookShelf books={wantToRead} title="Want to Read" />
             <BookShelf books={read} title="Read" />
           </div>

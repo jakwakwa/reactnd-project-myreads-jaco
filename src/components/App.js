@@ -19,6 +19,9 @@ class App extends Component {
   }
   changeShelf = (shelf, id) => {
     // 1. Take a copy of the existing state
+    // Here I'm making a copy firstly of the array
+    // and then inside the map function I'm making a copy of the book object
+    // this ensures that I don't edit the state directly.
     const books = this.state.books.map(
       book => (book.id === id ? { ...book, shelf: shelf } : book)
     );
@@ -52,8 +55,16 @@ class App extends Component {
               books={currentlyReading}
               title="Currently Reading"
             />
-            <BookShelf books={wantToRead} title="Want to Read" />
-            <BookShelf books={read} title="Read" />
+            <BookShelf
+              changeShelf={this.changeShelf}
+              books={wantToRead}
+              title="Want to Read"
+            />
+            <BookShelf
+              changeShelf={this.changeShelf}
+              books={read}
+              title="Read"
+            />
           </div>
         </div>
         <SearchButton />

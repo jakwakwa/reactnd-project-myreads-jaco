@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import '../styles/app.scss';
-// import ReactDOM from 'react-dom';
 import Header from './Layouts/Header';
 import BookShelf from './Books/BookShelf';
 import SearchButton from './Search/SearchButton';

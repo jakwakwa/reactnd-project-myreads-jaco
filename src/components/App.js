@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Route } from 'react-router-dom';
 import '../styles/app.scss';
 import Header from './Layouts/Header';
 import BookShelf from './Books/BookShelf';
@@ -47,26 +48,39 @@ class App extends Component {
     return (
       <Fragment>
         <Header title={pageTitle} />
-        <div className="list-books-content">
-          <div>
-            <BookShelf
-              changeShelf={this.changeShelf}
-              books={currentlyReading}
-              title="Currently Reading"
-            />
-            <BookShelf
-              changeShelf={this.changeShelf}
-              books={wantToRead}
-              title="Want to Read"
-            />
-            <BookShelf
-              changeShelf={this.changeShelf}
-              books={read}
-              title="Read"
-            />
-          </div>
-        </div>
-        <SearchButton />
+
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <Fragment>
+              <div className="list-books-content">
+                <div>
+                  <BookShelf
+                    changeShelf={this.changeShelf}
+                    books={currentlyReading}
+                    title="Currently Reading"
+                  />
+                  <BookShelf
+                    changeShelf={this.changeShelf}
+                    books={wantToRead}
+                    title="Want to Read"
+                  />
+                  <BookShelf
+                    changeShelf={this.changeShelf}
+                    books={read}
+                    title="Read"
+                  />
+                </div>
+              </div>
+              <SearchButton />
+            </Fragment>
+          )}
+        />
+        <Route
+          path="/search"
+          render={() => <div>Search Component goes here</div>}
+        />
       </Fragment>
     );
   }

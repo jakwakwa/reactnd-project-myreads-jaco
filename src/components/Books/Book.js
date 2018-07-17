@@ -13,6 +13,7 @@ class Book extends Component {
   };
   render() {
     const books = this.props.books;
+    console.log('books inside book component:', books);
     return (
       <li>
         <div className="book">
@@ -27,13 +28,25 @@ class Book extends Component {
             />
             <div className="book-shelf-changer">
               <select onChange={this.handleClick}>
-                <option selected="true" value="move" disabled>
+                <option value="move" disabled>
                   Move to...
                 </option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
+                <option
+                  selected={books.shelf === 'currentlyReading'}
+                  value="currentlyReading">
+                  Currently Reading
+                </option>
+                <option
+                  selected={books.shelf === 'wantToRead'}
+                  value="wantToRead">
+                  Want to Read
+                </option>
+                <option selected={books.shelf === 'read'} value="read">
+                  Read
+                </option>
+                <option selected={books.shelf === 'none'} value="none">
+                  None
+                </option>
               </select>
             </div>
           </div>

@@ -4,6 +4,7 @@ import '../styles/app.scss';
 import Header from './Layouts/Header';
 import BookShelf from './Books/BookShelf';
 import SearchButton from './Search/SearchButton';
+import Search from './Search/Search';
 import * as BooksAPI from '../utils/BooksAPI';
 
 const pageTitle = 'MyReads';
@@ -77,10 +78,7 @@ class App extends Component {
             </Fragment>
           )}
         />
-        <Route
-          path="/search"
-          render={() => <div>Search Component goes here</div>}
-        />
+        <Route path="/search" render={() => <Search />} />
       </Fragment>
     );
   }

@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Search.scss';
+import * as BooksAPI from '../../utils/BooksAPI';
 
 class Search extends Component {
   state = {
-    query: ''
+    query: '',
+    books: []
   };
   updateQuery = query => {
     this.setState({ query: query.trim() });
   };
+  // need to somehow pass in search qeury to this method
+  // I think the wrong mount method is used here because when component mounts, there's an empty string
+  componentDidUpdate() {
+    if (this.state.query) {
+      BooksAPI.search(this.state.query).then(books => {
+        this.setState({ books });
+      });
+    }
+  }
   render() {
     return (
       <div className="search-books">

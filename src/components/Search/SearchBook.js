@@ -27,7 +27,10 @@ class SearchBook extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select value={book.shelf} onChange={this.handleChange}>
+              <select
+                defaultValue="none"
+                value={book.shelf}
+                onChange={this.handleChange}>
                 <option value="move" disabled>
                   Move to...
                 </option>

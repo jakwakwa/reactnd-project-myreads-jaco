@@ -26,42 +26,31 @@ class App extends Component {
     const books = this.state.books.map(
       book => (book.id === id ? { ...book, shelf: shelf } : book)
     );
-    // 2. Get the correct object that matches book id
-    console.log('Copy of books', books);
-    console.log('copy of books with book shelf changed', books);
-    // console.log(targetBook);
     // 2. Set new books array to state
     this.setState({ books });
   };
 
   addBook = book => {
-    console.log('Book passed through to app:', book);
-    // 1. Take a copy of the existing state...
-
+    // book from search page gets added to App state:
+    // 1. Take a copy of the existing state using spread operator
+    // 2. add book (which is passed in from Search Component) to array
     const books = [...this.state.books, book];
-
-    console.log('Book moved into new books array', books);
-
-    // change book array in state
+    // 3. change book array in state
     this.setState({ books });
   };
   render() {
-    // filter 'currently reading' books
+    // Filter books and pass them into BookShelf
     const currentlyReading = this.state.books.filter(
       book => book.shelf === 'currentlyReading'
     );
-    // filter 'want to read'
     const wantToRead = this.state.books.filter(
       book => book.shelf === 'wantToRead'
     );
-    // filter 'read'
     const read = this.state.books.filter(book => book.shelf === 'read');
 
-    // console.log(this.state.books);
     return (
       <Fragment>
         <Header title={pageTitle} />
-
         <Route
           path="/"
           exact
@@ -92,7 +81,9 @@ class App extends Component {
         />
         <Route
           path="/search"
-          render={() => <Search addBook={this.addBook} />}
+          render={() => (
+            <Search books={this.state.books} addBook={this.addBook} />
+          )}
         />
       </Fragment>
     );

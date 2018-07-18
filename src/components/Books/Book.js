@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 class Book extends Component {
-  handleClick = e => {
+  handleChange = e => {
     e.preventDefault();
-    // got value from select > option value
+    // get value from select > option value
     const shelf = e.target.value;
-    // passed in id through index from parent component
+    // passed in id via index from parent component
     // Need the id of the book in order to target relevant object
     const id = this.props.index;
-    // passing values to changeShelf function which lives in the App Component
+    // passing data to changeShelf function which lives in the App Component
     this.props.changeShelf(shelf, id);
   };
   render() {
@@ -26,7 +26,7 @@ class Book extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select value="books.shelf" onChange={this.handleClick}>
+              <select value="books.shelf" onChange={this.handleChange}>
                 <option value="move" disabled>
                   Move to...
                 </option>

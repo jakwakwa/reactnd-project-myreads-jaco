@@ -12,17 +12,27 @@ class Search extends Component {
   updateQuery = query => {
     this.setState({ query: query.trim() });
   };
-  // need to somehow pass in search qeury to this method
-  // I think the wrong mount method is used here because when component mounts, there's an empty string
+  syncBookShelf = res => {
+    // Check that data is an Array
+    // prevents error when searching for something that is not part of the set of search terms
+    if (Array.isArray(res)) {
+      let books = res.map(book => {
+        let index = this.props.books.findIndex(i => i.id === book.id);
+        if (index !== -1) book.shelf = this.props.books[index].shelf;
+        return book;
+      });
+      return { books };
+    } else return { books: [] };
+  };
   componentDidUpdate(prevProps, prevState) {
     if (this.state.query !== prevState.query) {
-      BooksAPI.search(this.state.query).then(books => {
-        this.setState({ books });
+      BooksAPI.search(this.state.query).then(res => {
+        this.setState(() => this.syncBookShelf(res));
       });
     }
   }
   render() {
-    const books = this.state.books;
+    const { books = [] } = this.state;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -31,11 +41,11 @@ class Search extends Component {
           </Link>
           <div className="search-books-input-wrapper">
             {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
+              The search from BooksAPI is limited to a particular set of search terms.
               You can find these search terms here:
               https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
 
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+              The BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
             <input

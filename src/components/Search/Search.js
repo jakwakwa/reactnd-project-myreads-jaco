@@ -21,6 +21,7 @@ class Search extends Component {
     }
   }
   render() {
+    const books = this.state.books;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -42,11 +43,29 @@ class Search extends Component {
               value={this.state.query}
               onChange={event => this.updateQuery(event.target.value)}
             />
-            {JSON.stringify(this.state)}
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid" />
+          <ol className="books-grid">
+            {books.map(book => (
+              <li>
+                <div className="book">
+                  <div className="book-top">
+                    <div
+                      className="book-cover"
+                      style={{
+                        width: 128,
+                        height: 193,
+                        backgroundImage: `url(${book.imageLinks.thumbnail})`
+                      }}
+                    />
+                  </div>
+                  <div className="book-title">{book.title}</div>
+                  <div className="book-authors">{book.authors}</div>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     );

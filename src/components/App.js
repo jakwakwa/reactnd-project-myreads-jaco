@@ -33,6 +33,18 @@ class App extends Component {
     // 2. Set new books array to state
     this.setState({ books });
   };
+
+  addBook = book => {
+    console.log('Book passed through to app:', book);
+    // 1. Take a copy of the existing state...
+
+    const books = [...this.state.books, book];
+
+    console.log('Book moved into new books array', books);
+
+    // change book array in state
+    this.setState({ books });
+  };
   render() {
     // filter 'currently reading' books
     const currentlyReading = this.state.books.filter(
@@ -45,7 +57,7 @@ class App extends Component {
     // filter 'read'
     const read = this.state.books.filter(book => book.shelf === 'read');
 
-    console.log(this.state.books);
+    // console.log(this.state.books);
     return (
       <Fragment>
         <Header title={pageTitle} />
@@ -78,7 +90,10 @@ class App extends Component {
             </Fragment>
           )}
         />
-        <Route path="/search" render={() => <Search />} />
+        <Route
+          path="/search"
+          render={() => <Search addBook={this.addBook} />}
+        />
       </Fragment>
     );
   }

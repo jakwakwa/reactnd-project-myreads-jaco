@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SearchBook from './SearchBook';
 import '../../styles/Search.scss';
 import * as BooksAPI from '../../utils/BooksAPI';
 
@@ -13,8 +14,8 @@ class Search extends Component {
   };
   // need to somehow pass in search qeury to this method
   // I think the wrong mount method is used here because when component mounts, there's an empty string
-  componentDidUpdate() {
-    if (this.state.query) {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.query !== prevState.query) {
       BooksAPI.search(this.state.query).then(books => {
         this.setState({ books });
       });
@@ -48,22 +49,12 @@ class Search extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {books.map(book => (
-              <li>
-                <div className="book">
-                  <div className="book-top">
-                    <div
-                      className="book-cover"
-                      style={{
-                        width: 128,
-                        height: 193,
-                        backgroundImage: `url(${book.imageLinks.thumbnail})`
-                      }}
-                    />
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
-                </div>
-              </li>
+              <SearchBook
+                key={book.id}
+                index={book.id}
+                book={book}
+                addBook={this.props.addBook}
+              />
             ))}
           </ol>
         </div>

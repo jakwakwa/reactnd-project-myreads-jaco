@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 
-class Book extends Component {
-  handleClick = e => {
+class SearchBook extends Component {
+  handleChange = e => {
     e.preventDefault();
     // got value from select > option value
     const shelf = e.target.value;
-    // passed in id through index from parent component
-    // Need the id of the book in order to target relevant object
-    const id = this.props.index;
-    // passing values to changeShelf function which lives in the App Component
-    this.props.changeShelf(shelf, id);
+    // Store book object in variable
+    const book = this.props.book;
+    // pass book into function wich lives in App component
+    // console.log(book);
+    this.props.addBook({ ...book, shelf });
   };
   render() {
-    const books = this.props.books;
+    const book = this.props.book;
+    // console.log('books inside book component:', books);
     return (
       <li>
         <div className="book">
@@ -22,11 +23,11 @@ class Book extends Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url(${books.imageLinks.thumbnail})`
+                backgroundImage: `url(${book.imageLinks.thumbnail})`
               }}
             />
             <div className="book-shelf-changer">
-              <select value="books.shelf" onChange={this.handleClick}>
+              <select value={book.shelf} onChange={this.handleChange}>
                 <option value="move" disabled>
                   Move to...
                 </option>
@@ -37,12 +38,12 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{books.title}</div>
-          <div className="book-authors">{books.authors}</div>
+          <div className="book-title">{book.title}</div>
+          <div className="book-authors">{book.authors}</div>
         </div>
       </li>
     );
   }
 }
 
-export default Book;
+export default SearchBook;

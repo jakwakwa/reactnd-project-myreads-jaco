@@ -51,7 +51,9 @@ class SearchBook extends Component {
             </div>
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.authors}</div>
+          <div className="book-authors">
+            {'authors' in book ? book.authors : 'Author Unknown'}
+          </div>
         </div>
       </li>
     );

@@ -26,6 +26,8 @@ class App extends Component {
     const books = this.state.books.map(
       book => (book.id === id ? { ...book, shelf: shelf } : book)
     );
+    // update book in api
+    books.map(book => (book.id === id ? BooksAPI.update(book, shelf) : book));
     // 2. Set new books array to state
     this.setState({ books });
   };

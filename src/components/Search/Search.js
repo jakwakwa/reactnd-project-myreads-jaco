@@ -10,7 +10,7 @@ class Search extends Component {
     books: []
   };
   updateQuery = query => {
-    this.setState({ query: query.trim() });
+    this.setState({ query: query });
   };
   syncBookShelf = res => {
     // Check that data is an Array

@@ -13,6 +13,7 @@ class SearchBook extends Component {
   };
   render() {
     const book = this.props.book;
+    console.log(book);
     // console.log('books inside book component:', books);
     return (
       <li>
@@ -20,11 +21,19 @@ class SearchBook extends Component {
           <div className="book-top">
             <div
               className="book-cover"
-              style={{
-                width: 128,
-                height: 193,
-                backgroundImage: `url(${book.imageLinks.thumbnail})`
-              }}
+              style={
+                'imageLinks' in book
+                  ? {
+                      width: 128,
+                      height: 193,
+                      backgroundImage: `url(${book.imageLinks.thumbnail})`
+                    }
+                  : {
+                      width: 128,
+                      height: 193,
+                      backgroundImage: `none`
+                    }
+              }
             />
             <div className="book-shelf-changer">
               <select

@@ -21,8 +21,11 @@
 
 .book {
   padding: 10px;
-  width: 140px;
+  width: 130px;
+  min-height: 300px;
   background-color: $lightColor;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 3px;
 
   .book-top {
     position: relative;
@@ -31,17 +34,24 @@
     align-items: flex-end;
   }
 
+  .book-cover {
+    border: 1px solid $color200;
+  }
+
   .book-title,
   .book-authors {
+    font-family: $fontRoboto;
     font-size: 0.8em;
   }
 
   .book-title {
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: $fontMedium;
   }
 
   .book-authors {
-    color: #999;
+    color: $mainColor;
   }
 }
 

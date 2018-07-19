@@ -1,7 +1,15 @@
-@import "variables";
+@import 'variables';
 
-.app {
-  p {
-    color: $mainColor;
-  }
+body {
+  background-color: $darkColor;
+  font-family: $fontRoboto;
+}
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }

@@ -9,12 +9,13 @@ class SearchBook extends Component {
     const book = this.props.book;
     // pass book into function wich lives in App component
     // console.log(book);
-    this.props.addBook({ ...book, shelf });
+    const id = this.props.index;
+
+    console.log('id in SearchBook', id);
+    this.props.addBook({ ...book, shelf }, shelf, id);
   };
   render() {
     const book = this.props.book;
-    console.log(book);
-    // console.log('books inside book component:', books);
     return (
       <li>
         <div className="book">

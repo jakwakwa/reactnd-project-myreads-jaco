@@ -32,13 +32,18 @@ class App extends Component {
     this.setState({ books });
   };
 
-  addBook = book => {
+  addBook = (book, shelf, id) => {
     // book from search page gets added to App state:
     // 1. Take a copy of the existing state using spread operator
     // 2. add book (which is passed in from Search Component) to array
     const books = [...this.state.books, book];
-    // 3. change book array in state
+    console.log(books);
+    // 3. update book in api
     this.setState({ books });
+
+    books.map(book => (book.id === id ? BooksAPI.update(book, shelf) : book));
+    // "8jZBksh-bUMC"
+    // 4. change book array in state
   };
   render() {
     // Filter books and pass them into BookShelf

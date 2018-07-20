@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBook from './SearchBook';
+import Book from '../Books/Book';
+// import SearchBook from './SearchBook';
 import '../../styles/Search.scss';
 import * as BooksAPI from '../../utils/BooksAPI';
 
@@ -12,12 +13,12 @@ class Search extends Component {
   updateQuery = query => {
     this.setState({ query: query });
   };
-  changeShelf = book => {
+  changeShelf = (book, shelf) => {
     const books = this.state.books.map(
       res => (res.id === book.id ? book : res)
     );
     this.setState({ books }, () => {
-      this.props.addBook(book);
+      this.props.addBook(book, shelf);
     });
   };
   syncBookShelf = res => {
@@ -77,11 +78,11 @@ class Search extends Component {
         <div className="search-books-results">
           <ol className="books-grid books-grid--fullHeight">
             {books.map(book => (
-              <SearchBook
+              <Book
                 key={book.id}
                 index={book.id}
                 book={book}
-                addBook={this.changeShelf}
+                addBookChangeShelf={this.changeShelf}
               />
             ))}
           </ol>

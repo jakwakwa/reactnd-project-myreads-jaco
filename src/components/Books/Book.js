@@ -5,29 +5,33 @@ class Book extends Component {
     e.preventDefault();
     // get value from select > option value
     const shelf = e.target.value;
-    // passed in id via index from parent component
-    // Need the id of the book in order to target relevant object
-
-    const book = this.props.books;
-    // passing data to changeShelf function which lives in the App Component
+    const book = this.props.book;
     this.props.addBookChangeShelf(book, shelf);
   };
   render() {
-    const books = this.props.books;
+    const book = this.props.book;
     return (
       <li>
         <div className="book">
           <div className="book-top">
             <div
               className="book-cover"
-              style={{
-                width: 128,
-                height: 193,
-                backgroundImage: `url(${books.imageLinks.thumbnail})`
-              }}
+              style={
+                'imageLinks' in book
+                  ? {
+                      width: 128,
+                      height: 193,
+                      backgroundImage: `url(${book.imageLinks.thumbnail})`
+                    }
+                  : {
+                      width: 128,
+                      height: 193,
+                      backgroundImage: `none`
+                    }
+              }
             />
             <div className="book-shelf-changer">
-              <select value={books.shelf} onChange={this.handleChange}>
+              <select value={book.shelf} onChange={this.handleChange}>
                 <option value="move" disabled>
                   Move to...
                 </option>
@@ -38,8 +42,10 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{books.title}</div>
-          <div className="book-authors">{books.authors}</div>
+          <div className="book-title">{book.title}</div>
+          <div className="book-authors">
+            {'authors' in book ? book.authors : 'Author Unknown'}
+          </div>
         </div>
       </li>
     );

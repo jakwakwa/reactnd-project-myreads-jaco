@@ -6,9 +6,9 @@ class SearchBook extends Component {
     // got value from select > option value
     const shelf = e.target.value;
     // Store book object and index value in variables
-    const { book, index: id } = this.props;
-    // pass book into function wich lives in App component
-    this.props.addBook({ ...book, shelf }, shelf, id);
+    const { book } = this.props;
+    // changeShelf in Search page instantly
+    this.props.addBook({ ...book, shelf });
   };
   render() {
     const book = this.props.book;

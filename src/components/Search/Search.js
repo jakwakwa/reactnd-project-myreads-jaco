@@ -12,14 +12,23 @@ class Search extends Component {
   updateQuery = query => {
     this.setState({ query: query });
   };
+  changeShelf = book => {
+    // const books = [...this.state.books, book];
+    console.log(book);
+    const books = this.state.books.map(
+      res => (res.id === book.id ? book : res)
+    );
+    console.log(books);
+    this.setState({ books }, () => {
+      this.props.addBook(book);
+    });
+  };
   syncBookShelf = res => {
     // Check that data is an Array
     // prevents error when searching for something that is not part of the set of search terms
     if (Array.isArray(res)) {
       let books = res.map(book => {
         let index = this.props.books.findIndex(i => i.id === book.id);
-        // give a book the value of 'none'
-        // book.shelf = 'none';
         if (index !== -1) {
           book.shelf = this.props.books[index].shelf;
         }
@@ -75,7 +84,7 @@ class Search extends Component {
                 key={book.id}
                 index={book.id}
                 book={book}
-                addBook={this.props.addBook}
+                addBook={this.changeShelf}
               />
             ))}
           </ol>

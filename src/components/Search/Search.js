@@ -13,12 +13,9 @@ class Search extends Component {
     this.setState({ query: query });
   };
   changeShelf = book => {
-    // const books = [...this.state.books, book];
-    console.log(book);
     const books = this.state.books.map(
       res => (res.id === book.id ? book : res)
     );
-    console.log(books);
     this.setState({ books }, () => {
       this.props.addBook(book);
     });

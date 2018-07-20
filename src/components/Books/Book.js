@@ -10,7 +10,7 @@ class Book extends Component {
 
     const book = this.props.books;
     // passing data to changeShelf function which lives in the App Component
-    this.props.changeShelf(book, shelf);
+    this.props.addBookChangeShelf(book, shelf);
   };
   render() {
     const books = this.props.books;

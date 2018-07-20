@@ -12,7 +12,7 @@ class BooksList extends Component {
             key={books.id}
             index={books.id}
             books={books}
-            changeShelf={this.props.changeShelf}
+            addBookChangeShelf={this.props.addBookChangeShelf}
           />
         ))}
       </ol>

@@ -18,15 +18,27 @@ class Search extends Component {
     if (Array.isArray(res)) {
       let books = res.map(book => {
         let index = this.props.books.findIndex(i => i.id === book.id);
-        if (index !== -1) book.shelf = this.props.books[index].shelf;
+        // give a book the value of 'none'
+        // book.shelf = 'none';
+        if (index !== -1) {
+          book.shelf = this.props.books[index].shelf;
+        }
         return book;
       });
       return { books };
     } else return { books: [] };
   };
+  defaultBookShelf = res => {
+    if (Array.isArray(res)) {
+      res.map(book => (book.shelf = 'none'));
+    }
+  };
   componentDidUpdate(prevProps, prevState) {
     if (this.state.query !== prevState.query) {
       BooksAPI.search(this.state.query).then(res => {
+        // Set default shelf values
+        this.defaultBookShelf(res);
+        // set state which will be the search results on the screen
         this.setState(() => this.syncBookShelf(res));
       });
     }

@@ -5,13 +5,9 @@ class SearchBook extends Component {
     e.preventDefault();
     // got value from select > option value
     const shelf = e.target.value;
-    // Store book object in variable
-    const book = this.props.book;
+    // Store book object and index value in variables
+    const { book, index: id } = this.props;
     // pass book into function wich lives in App component
-    // console.log(book);
-    const id = this.props.index;
-
-    console.log('id in SearchBook', id);
     this.props.addBook({ ...book, shelf }, shelf, id);
   };
   render() {
@@ -37,10 +33,7 @@ class SearchBook extends Component {
               }
             />
             <div className="book-shelf-changer">
-              <select
-                defaultValue="none"
-                value={book.shelf}
-                onChange={this.handleChange}>
+              <select value={book.shelf} onChange={this.handleChange}>
                 <option value="move" disabled>
                   Move to...
                 </option>

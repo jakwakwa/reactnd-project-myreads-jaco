@@ -18,16 +18,16 @@ class App extends Component {
       this.setState({ books });
     });
   }
-  changeShelf = (shelf, id) => {
+  changeShelf = (book, shelf) => {
     // 1. Take a copy of the existing state
     // Here I'm making a copy firstly of the array
     // and then inside the map function I'm making a copy of the book object
     // this ensures that I don't edit the state directly.
     const books = this.state.books.map(
-      book => (book.id === id ? { ...book, shelf: shelf } : book)
+      res => (res.id === book.id ? { ...res, shelf: shelf } : res)
     );
     // update book in api
-    books.map(book => (book.id === id ? BooksAPI.update(book, shelf) : book));
+    books.map(res => (res.id === book.id ? BooksAPI.update(res, shelf) : res));
     // 2. Set new books array to state
     this.setState({ books });
   };

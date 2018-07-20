@@ -7,9 +7,10 @@ class Book extends Component {
     const shelf = e.target.value;
     // passed in id via index from parent component
     // Need the id of the book in order to target relevant object
-    const id = this.props.index;
+
+    const book = this.props.books;
     // passing data to changeShelf function which lives in the App Component
-    this.props.changeShelf(shelf, id);
+    this.props.changeShelf(book, shelf);
   };
   render() {
     const books = this.props.books;

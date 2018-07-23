@@ -16,7 +16,15 @@ In order to run the application, explore the following:
 
 In the folder that is created after you cloned the project:
 
+First install node modules:
+
+`yarn install`
+
+Then run development server:
+
 `yarn start`
+
+Open browser on port 3000
 
 ## Deployment
 

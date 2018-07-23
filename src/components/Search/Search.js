@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Book from '../Books/Book';
-// import SearchBook from './SearchBook';
 import '../../styles/Search.scss';
 import * as BooksAPI from '../../utils/BooksAPI';
 
